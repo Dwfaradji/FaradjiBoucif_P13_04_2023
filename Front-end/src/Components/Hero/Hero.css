@@ -32,7 +32,7 @@
 @media (min-width: 920px) {
     .hero {
         height: 400px;
-        background-position: 0% 33%;
+        background-position: 0 33%;
     }
 
     .hero-content {

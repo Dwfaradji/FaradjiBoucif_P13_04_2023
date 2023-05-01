@@ -6,7 +6,7 @@ import User from '../Pages/User/User';
 
 const RouteApp = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-debugger
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         setIsAuthenticated(!!token);
@@ -14,10 +14,9 @@ debugger
 
     return (
         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signIn" element={isAuthenticated ? <Navigate to="/user" replace={true} /> : <SignIn />} />
-            <Route path="/user" element={isAuthenticated ? <User /> : <Navigate to="/signIn" replace={true} />} />
-            <Route path="/*" element={<Navigate to="/signIn" replace={true} />} />
+            <Route path="/" element={<Home/>}/>
+            <Route path="/signIn" element={isAuthenticated ? <Navigate to="/user" replace={true}/> : <SignIn/>}/>
+            <Route path="/user" element={isAuthenticated ? <User /> : <Navigate to="/signIn" replace={true}/>}/>
         </Routes>
 
     );

@@ -13,12 +13,12 @@ paths:
     post:
       tags:
         - User Module
-      summary: Login
-      description: API for Login
+      summary: CallApi
+      description: API for CallApi
       parameters:
         - in: body
           name: body
-          description: Login Payload
+          description: CallApi Payload
           required: true
           schema:
             $ref: '#/definitions/Login'
@@ -26,7 +26,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: Login Successfully
+          description: CallApi Successfully
           schema:
             $ref: '#/definitions/LoginResponse'
         '400':

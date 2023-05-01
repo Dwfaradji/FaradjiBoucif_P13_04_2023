@@ -11,3 +11,34 @@
     color: #fff;
     margin-bottom: 2rem;
 }
+
+.header form {
+    display: none;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 35%;
+    margin: 0 auto;
+    row-gap: 10px;
+}
+
+.edit-input {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5px;
+}
+
+.bloc-button {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 80px 80px;
+    column-gap: 5px;
+}
+
+.display {
+    display: grid !important;
+}
+
+.none {
+    display: none;
+}

@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import CallApi from "../../Services/CallApi";
+import  {Login} from "../../Services/CallApi";
 import "./SignIn.css"
-
 
 const SignIn = () => {
     const [userName, setUserName] = useState('');
@@ -9,8 +8,8 @@ const SignIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const response = await CallApi(userName, password);
-        if (response === true) {
+        const response = await Login(userName, password);
+        if (response.status === 200) {
             window.location.href = "/user"
         }
     }
