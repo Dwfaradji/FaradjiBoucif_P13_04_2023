@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import "./SignIn.css"
 import {useDispatch} from "react-redux";
-import {loginUser} from "../../features/counter/counterAPI";
+import {loginUser} from "../../features/user/userApi";
 import {useNavigate} from "react-router-dom";
 
 const SignIn = () => {
@@ -12,11 +12,10 @@ const SignIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const user = {
-            email: email,
-            password: password,
-        };
-        await dispatch(loginUser({type: "auth/addCase", payload: user}));
+        await dispatch(loginUser({type: "auth/addCase", payload: {
+                email: email,
+                password: password,
+            }}));
         navigate('/user');
     };
 

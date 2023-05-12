@@ -1,6 +1,5 @@
 import React from 'react';
 import "./Hero.css"
-import {useSelector} from "react-redux";
 
 const Hero = () => {
 

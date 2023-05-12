@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {setToken} from "./counterSlice";
+import {setToken} from "./userSlice";
 
 const baseUrl = 'http://localhost:3001/api/v1';
 
@@ -21,18 +21,16 @@ export const loginUser = createAsyncThunk(
 export const putProfile = createAsyncThunk(
     'user/putProfile',
     async (data) => {
-
         const headers = {
             'accept': 'application/json',
             'Authorization': `Bearer ${data.token}`,
             'Content-Type': 'application/json'
         };
-        const users = {
-            "firstName": data.user.firstName,
-            "lastName": data.user.lastName
-        };
         try {
-            const response = await axios.put(`${baseUrl}/user/profile`, users, {headers});
+            const response = await axios.put(`${baseUrl}/user/profile`, {
+                "firstName": data.user.firstName,
+                "lastName": data.user.lastName
+            }, {headers});
             return await response.data;
         } catch (error) {
             console.log('Erreur lors de la requête POST', error);

@@ -4,7 +4,7 @@ import Home from '../Pages/Home/Home';
 import SignIn from '../Pages/SignIn/SignIn';
 import User from '../Pages/User/User';
 import {useDispatch, useSelector} from "react-redux";
-import {getProfile} from "../features/counter/counterAPI";
+import {getProfile} from "../features/user/userApi";
 
 
 const RouteApp = () => {

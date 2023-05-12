@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {putProfile, loginUser, getProfile} from './counterAPI';
+import {putProfile, loginUser, getProfile} from './userApi';
 
 const tokenSlice = createSlice({
     name: "token",

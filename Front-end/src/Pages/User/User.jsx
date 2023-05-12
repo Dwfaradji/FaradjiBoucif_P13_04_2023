@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 import "./User.css"
 import Account from "../../Components/Account/Account";
 import {useDispatch, useSelector} from "react-redux";
-import {getProfile, putProfile} from "../../features/counter/counterAPI";
+import {getProfile, putProfile} from "../../features/user/userApi";
 
 const User = () => {
     const [userFirstName, setUserFirstName] = useState("");
