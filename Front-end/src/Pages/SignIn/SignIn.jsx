@@ -1,18 +1,25 @@
 import React, {useState} from 'react';
-import  {Login} from "../../Services/CallApi";
 import "./SignIn.css"
+import {useDispatch} from "react-redux";
+import {loginUser} from "../../features/counter/counterAPI";
+import {useNavigate} from "react-router-dom";
 
 const SignIn = () => {
-    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        const response = await Login(userName, password);
-        if (response.status === 200) {
-            window.location.href = "/user"
-        }
-    }
+        e.preventDefault();
+        const user = {
+            email: email,
+            password: password,
+        };
+        await dispatch(loginUser({type: "auth/addCase", payload: user}));
+        navigate('/user');
+    };
+
     return (
         <main className="main bg-dark">
             <section className="sign-in-content">
@@ -21,7 +28,7 @@ const SignIn = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label
-                        ><input type="text" id="username" onChange={(e) => setUserName(e.target.value)}/>
+                        ><input type="text" id="username" onChange={(e) => setEmail(e.target.value)}/>
                     </div>
                     <div className="input-wrapper">
                         <label htmlFor="password">Password</label

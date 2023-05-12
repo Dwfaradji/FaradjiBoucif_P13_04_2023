@@ -1,26 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import "./User.css"
 import Account from "../../Components/Account/Account";
-import {getProfile, updateProfile} from "../../Services/CallApi";
+import {useDispatch, useSelector} from "react-redux";
+import {getProfile, putProfile} from "../../features/counter/counterAPI";
 
 const User = () => {
     const [userFirstName, setUserFirstName] = useState("");
     const [userLastName, setUserLastName] = useState("");
     const [edit, setEdit] = useState("")
     const [btnEdit, setBtnEdit] = useState(`edit-button`)
-    const [data, setData] = useState({})
-    const token = localStorage.getItem('token');
+    const {token} = useSelector((state) => state.token);
+    const {profileInfos} = useSelector((state) => state.infosUser);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        getProfile(token).then((response) => {
-            setData(response)
-        });
-    }, [token, data])
-
-    const handleSaveName = async (e) => {
+    const handleSaveName = (e) => {
         e.preventDefault()
-        if (userFirstName && userLastName && (userFirstName !== data.firstName || userLastName !== data.lastName)) {
-            await updateProfile(userFirstName, userLastName, token);
+        const user = {
+            firstName: userFirstName,
+            lastName: userLastName
+        }
+        if (userFirstName && userLastName ) {
+            dispatch(putProfile({token, user}));
+            dispatch(getProfile(token));
         }
     };
 
@@ -36,7 +37,9 @@ const User = () => {
     return (
         <main className="main bg-dark">
             <div className="header">
-                <h1>Welcome back<br/>{`${data.firstName} ${data.lastName}`}!</h1>
+                {profileInfos &&
+                    <h1>Welcome back<br/>{`${profileInfos.firstName} ${profileInfos.lastName}`}!</h1>
+                }
                 <button className={btnEdit} onClick={() => handleEdit(true)}>Edit Name</button>
                 <form className={edit} onSubmit={handleSaveName}>
                     <div className="edit-input">

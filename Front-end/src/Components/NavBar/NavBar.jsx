@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import logo from "../../Assets/img/argentBankLogo.png";
 import "./NavBar.css"
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 
 /**
  *
@@ -10,37 +11,41 @@ import {Link} from "react-router-dom";
  * @constructor
  */
 const NavBar = ({userLogin}) => {
-    const [login, setLogin] = useState(userLogin)
+    const [login, setLogin] = useState(false)
+    const {token} = useSelector(state => state.token)
+    const {profileInfos} = useSelector((state) => state.infosUser);
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        const jsonString = localStorage.getItem("active")
-        const myObject = JSON.parse(jsonString);
-        setLogin(myObject)
-    },[])
+        setLogin(token !== null);
+    }, [token]);
 
     const handleLogout = () => {
-        localStorage.removeItem('active');
-        localStorage.removeItem('token');
-        window.location.href = "/"
+        localStorage.removeItem("authToken");
+        dispatch({type: "token/setToken", payload: null});
     }
 
     return (
         <nav className="main-nav">
-            <a className="main-nav-logo" href="/">
+            <Link className="main-nav-logo" to="/">
                 <img
                     className="main-nav-logo-image"
                     src={logo}
                     alt="Argent Bank Logo"
                 />
                 <h1 className="sr-only">Argent Bank</h1>
-            </a>
+            </Link>
             {login ? (
                 <div>
-                    <Link className="main-nav-item" to="/user">
-                        <i className="fa fa-user-circle"></i>
-                        Tony
-                    </Link>
-                    <Link className="main-nav-item" onClick={handleLogout}>
+                    {
+                        profileInfos &&
+                        <Link className="main-nav-item" to="/user">
+                            <i className="fa fa-user-circle"></i>
+                            {profileInfos.firstName}
+                        </Link>
+                    }
+
+                    <Link className="main-nav-item" to="/" onClick={handleLogout}>
                         <i className="fa fa-sign-out"></i>
                         Sign Out
                     </Link>

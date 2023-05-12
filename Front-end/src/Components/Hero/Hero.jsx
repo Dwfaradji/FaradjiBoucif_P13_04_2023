@@ -1,7 +1,9 @@
 import React from 'react';
 import "./Hero.css"
+import {useSelector} from "react-redux";
 
 const Hero = () => {
+
     return (
         <div className="hero">
             <section className="hero-content">

@@ -4,7 +4,7 @@ import "./Account.css"
 /**
  *
  * @param {string} title
- * @param {number} amount
+ * @param {string} amount
  * @param {string} amountDescription
  * @returns {JSX.Element}
  * @constructor

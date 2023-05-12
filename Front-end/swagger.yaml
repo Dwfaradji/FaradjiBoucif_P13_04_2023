@@ -1,0 +1,118 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "API de gestion des transactions"
+  description: "Une API pour gérer les transactions d'un utilisateur"
+host: "api.example.com"
+basePath: "/v1"
+schemes:
+  - "https"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  /transactions/{id}:
+    get:
+      security:
+        - Bearer: []
+      summary: Récupérer une transaction
+      description:
+        Cette route renvoie une transaction spécifique de l'utilisateur.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: id
+          description: ID de la transaction à récupérer
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Succès de la récupération de la transaction
+          schema:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date-time
+                example: "2022-05-09T10:30:00.000Z"
+              description:
+                type: string
+                example: "Achat de nourriture"
+              amount:
+                type: number
+                example: 25.99
+              balance:
+                type: number
+                example: 153.20
+              type:
+                type: string
+                example: "Dépense"
+    put:
+      security:
+        - Bearer: []
+      summary: Modifier une transaction
+      description:
+        Cette route permet de modifier une transaction spécifique de l'utilisateur.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: id
+          description: ID de la transaction à modifier
+          required: true
+          type: integer
+        - in: body
+          name: body
+          description: Nouvelles données de la transaction
+          required: true
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                example: "Achat de nourriture et de boissons"
+              amount:
+                type: number
+                example: 35.99
+              balance:
+                type: number
+                example: 117.21
+              type:
+                type: string
+                example: "Dépense"
+      responses:
+        '200':
+          description: Succès de la modification de la transaction
+    delete:
+      security:
+        - Bearer: []
+      summary: Supprimer une transaction
+      description:
+        Cette route permet de supprimer une transaction spécifique de l'utilisateur.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: id
+          description: ID de la transaction à supprimer
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Succès de la suppression de la transaction
