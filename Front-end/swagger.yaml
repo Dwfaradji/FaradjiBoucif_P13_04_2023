@@ -3,8 +3,8 @@ info:
   version: "1.0.0"
   title: "API de gestion des transactions"
   description: "Une API pour gérer les transactions d'un utilisateur"
-host: "api.example.com"
-basePath: "/v1"
+host: localhost:3000
+basePath: /app/v1
 schemes:
   - "https"
 consumes:
@@ -20,7 +20,7 @@ paths:
   /transactions/{id}:
     get:
       security:
-        - Bearer: []
+        - Bearer: [ ]
       summary: Récupérer une transaction
       description:
         Cette route renvoie une transaction spécifique de l'utilisateur.
@@ -59,10 +59,10 @@ paths:
                 example: "Dépense"
     put:
       security:
-        - Bearer: []
-      summary: Modifier une transaction
+        - Bearer: [ ]
+      summary: Modifier une catégorie
       description:
-        Cette route permet de modifier une transaction spécifique de l'utilisateur.
+        Cette route permet de modifier une catégories.
       parameters:
         - in: header
           name: Authorization
@@ -84,21 +84,37 @@ paths:
               description:
                 type: string
                 example: "Achat de nourriture et de boissons"
-              amount:
-                type: number
-                example: 35.99
-              balance:
-                type: number
-                example: 117.21
-              type:
-                type: string
-                example: "Dépense"
       responses:
         '200':
-          description: Succès de la modification de la transaction
+          description: Succès de la modification de la catégorie
+    post:
+      security:
+        - Bearer: [ ]
+      summary: Ajouter une note
+      description:
+        Cette route permet d'ajouter une note a une transaction.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Données de la transaction
+          required: true
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                example: "Achat pour la sortie scolaire"
+      responses:
+        '200':
+          description: Succès de la création de la note
     delete:
       security:
-        - Bearer: []
+        - Bearer: [ ]
       summary: Supprimer une transaction
       description:
         Cette route permet de supprimer une transaction spécifique de l'utilisateur.
@@ -116,3 +132,41 @@ paths:
       responses:
         '200':
           description: Succès de la suppression de la transaction
+  /transactions:
+    get:
+      security:
+        - Bearer: [ ]
+      summary: Récupérer toutes les transactions
+      description:
+        Cette route renvoie toutes les transactions de l'utilisateur.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Succès de la récupération des transactions
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                  example: "2022-05-09T10:30:00.000Z"
+                description:
+                  type: string
+                  example: "Achat de nourriture"
+                amount:
+                  type: number
+                  example: 25.99
+                balance:
+                  type: number
+                  example: 153.20
+                type:
+                  type: string
+                  example: "Dépense"
+
