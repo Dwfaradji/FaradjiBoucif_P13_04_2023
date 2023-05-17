@@ -6,7 +6,6 @@ import User from '../Pages/User/User';
 import {useDispatch, useSelector} from "react-redux";
 import {getProfile} from "../features/user/userApi";
 
-
 const RouteApp = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(null)
     const {token} = useSelector((state) => state.token)
@@ -26,7 +25,6 @@ const RouteApp = () => {
             <Route path="/user" element={isAuthenticated ? <User/> :
                 <Navigate to="/signIn" replace={true}/>}/>
         </Routes>
-
     );
 };
 
