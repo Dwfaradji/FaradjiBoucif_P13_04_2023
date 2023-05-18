@@ -3,7 +3,7 @@ info:
   version: "1.0.0"
   title: "API de gestion des transactions"
   description: "Une API pour gérer les transactions d'un utilisateur"
-host: localhost:3000
+host: localhost:3001
 basePath: /app/v1
 schemes:
   - "https"
@@ -11,11 +11,6 @@ consumes:
   - "application/json"
 produces:
   - "application/json"
-securityDefinitions:
-  Bearer:
-    type: apiKey
-    name: Authorization
-    in: header
 paths:
   /transactions/{id}:
     get:
@@ -39,24 +34,13 @@ paths:
         '200':
           description: Succès de la récupération de la transaction
           schema:
-            type: object
-            properties:
-              date:
-                type: string
-                format: date-time
-                example: "2022-05-09T10:30:00.000Z"
-              description:
-                type: string
-                example: "Achat de nourriture pour animaux"
-              amount:
-                type: number
-                example: 25.99
-              balance:
-                type: number
-                example: 153.20
-              type:
-                type: string
-                example: "Dépense"
+            $ref: '#/definitions/allTransactions'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+      produces:
+        - application/json
     put:
       security:
         - Bearer: [ ]
@@ -79,14 +63,16 @@ paths:
           description: Nouvelles données de la transaction
           required: true
           schema:
-            type: object
-            properties:
-              description:
-                type: string
-                example: "Achat de nourriture pour oiseaux"
+            $ref: '#/definitions/putTransaction'
+      produces:
+        - application/json
       responses:
         '200':
           description: Succès de la modification de la catégorie
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
     post:
       security:
         - Bearer: [ ]
@@ -104,14 +90,17 @@ paths:
           description: Données de la transaction
           required: true
           schema:
-            type: object
-            properties:
-              description:
-                type: string
-                example: "Achat pour la sortie scolaire"
+              $ref: '#/definitions/deleteTransaction'
+      produces:
+            - application/json
       responses:
         '200':
           description: Succès de la création de la note
+        '400':
+            description: Invalid Fields
+        '500':
+            description: Internal Server Error
+
     delete:
       security:
         - Bearer: [ ]
@@ -132,6 +121,11 @@ paths:
       responses:
         '200':
           description: Succès de la suppression de la transaction
+        '400':
+          description: Invalid Fields
+        '500':
+            description: Internal Server Error
+
   /transactions:
     get:
       security:
@@ -149,24 +143,43 @@ paths:
         '200':
           description: Succès de la récupération des transactions
           schema:
-            type: array
-            items:
-              type: object
-              properties:
-                date:
-                  type: string
-                  format: date-time
-                  example: "2022-05-09T10:30:00.000Z"
-                description:
-                  type: string
-                  example: "Achat de nourriture"
-                amount:
-                  type: number
-                  example: 25.99
-                balance:
-                  type: number
-                  example: 153.20
-                type:
-                  type: string
-                  example: "Dépense"
+              $ref: '#/definitions/allTransactions'
+        '400':
+            description: Invalid Fields
+        '500':
+            description: Internal Server Error
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  allTransactions:
+      properties:
+        date:
+          type: string
+          format: date-time
+          example: "2022-05-09T10:30:00.000Z"
+        description:
+          type: string
+          example: "Achat de nourriture"
+        amount:
+          type: number
+          example: 25.99
+        balance:
+          type: number
+          example: 153.20
+        type:
+          type: string
+          example: "Dépense"
+  deleteTransaction:
+    properties:
+      description:
+        type: string
+        example: "Achat pour la sortie scolaire"
+  putTransaction:
+    properties:
+      description:
+        type: string
+        example: "Achat de nourriture pour oiseaux"
 
