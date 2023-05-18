@@ -9,7 +9,7 @@ import "./Account.css"
  * @returns {JSX.Element}
  * @constructor
  */
-const Account = ({title,amount,amountDescription}) => {
+const Account = ({title, amount, amountDescription}) => {
     return (
         <section className="account">
             <div className="account-content-wrapper">

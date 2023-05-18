@@ -12,10 +12,12 @@ const SignIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(loginUser({type: "auth/addCase", payload: {
+        await dispatch(loginUser({
+            type: "auth/addCase", payload: {
                 email: email,
                 password: password,
-            }}));
+            }
+        }));
         navigate('/user');
     };
 

@@ -12,8 +12,7 @@ const tokenSlice = createSlice({
         },
     }
 })
-
-export const { setToken } = tokenSlice.actions;
+export const {setToken} = tokenSlice.actions;
 
 const authSlice = createSlice({
     name: 'auth',

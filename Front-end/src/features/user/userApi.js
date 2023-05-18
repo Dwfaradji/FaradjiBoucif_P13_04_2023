@@ -42,13 +42,11 @@ export const putProfile = createAsyncThunk(
 export const getProfile = createAsyncThunk(
     'user/getProfile',
     async (token) => {
-
         const headers = {
             'accept': 'application/json',
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         };
-
         try {
             const response = await axios.post(`${baseUrl}/user/profile`, {}, {headers});
             const rawData = await response.data;

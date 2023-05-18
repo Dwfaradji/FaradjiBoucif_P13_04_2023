@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import "./User.css"
 import Account from "../../Components/Account/Account";
 import {useDispatch, useSelector} from "react-redux";
@@ -19,13 +19,19 @@ const User = () => {
             firstName: userFirstName,
             lastName: userLastName
         }
-        if (userFirstName && userLastName ) {
+        if (userFirstName && userLastName) {
             dispatch(putProfile({token, user}));
             dispatch(getProfile(token));
         }
+
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => {
+                input.value = ""
+            }
+        )
     };
 
-    const handleEdit = (editBtn) => {
+    const handleClickEdit = (editBtn) => {
         if (editBtn) {
             setEdit("display")
             setBtnEdit("none")
@@ -40,19 +46,20 @@ const User = () => {
                 {profileInfos &&
                     <h1>Welcome back<br/>{`${profileInfos.firstName} ${profileInfos.lastName}`}!</h1>
                 }
-                <button className={btnEdit} onClick={() => handleEdit(true)}>Edit Name</button>
+                <button className={btnEdit} onClick={() => handleClickEdit(true)}>Edit Name</button>
                 <form className={edit} onSubmit={handleSaveName}>
                     <div className="edit-input">
-                        <input type="text" placeholder="Tony"
+                        <input type="text" placeholder={profileInfos && profileInfos.firstName}
                                onChange={(e) => setUserFirstName(e.target.value.trim())}/>
-                        <input type="text" placeholder="Jarvis"
+                        <input type="text" placeholder={profileInfos && profileInfos.lastName}
                                onChange={(e) => setUserLastName(e.target.value.trim())}/>
                     </div>
                     <div className="bloc-button">
-                        <button className="edit-button" type="submit" onClick={() => handleEdit(false)}>Save</button>
-                        <button className="edit-button" type="reset" onClick={() => handleEdit(false)}>Cancel</button>
+                        <button className="edit-button" type="submit" onClick={() => handleClickEdit(false)}>Save
+                        </button>
+                        <button className="edit-button" type="reset" onClick={() => handleClickEdit(false)}>Cancel
+                        </button>
                     </div>
-
                 </form>
             </div>
             <h2 className="sr-only">Accounts</h2>
