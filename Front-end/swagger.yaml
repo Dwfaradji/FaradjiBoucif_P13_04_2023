@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
   version: "1.0.0"
-  title: "API de gestion des transactions"
-  description: "Une API pour gérer les transactions d'un utilisateur"
+  title: "Transaction Management API"
+  description: "An API for managing user transactions"
 host: localhost:3001
 basePath: /app/v1
 schemes:
@@ -13,141 +13,110 @@ produces:
   - "application/json"
 paths:
   /transactions/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: ID of the transaction to retrieve/modify/delete
+        required: true
+        type: integer
     get:
       security:
-        - Bearer: [ ]
-      summary: Récupérer une transaction
-      description:
-        Cette route renvoie une transaction spécifique de l'utilisateur.
+        - Bearer: []
+      summary: Get a transaction
+      description: "This route returns a specific transaction for the user."
       parameters:
         - in: header
           name: Authorization
-          description: Attach Bearer JWT token
+          description: "Attach Bearer JWT token"
           required: true
           type: string
         - in: path
           name: id
-          description: ID de la transaction à récupérer
+          description: "ID of the transaction to retrieve"
           required: true
           type: integer
       responses:
         '200':
-          description: Succès de la récupération de la transaction
+          description: "Success in retrieving the transaction"
           schema:
             $ref: '#/definitions/allTransactions'
         '400':
-          description: Invalid Fields
+          description: "Invalid Fields"
         '500':
-          description: Internal Server Error
-      produces:
-        - application/json
+          description: "Internal Server Error"
     put:
       security:
-        - Bearer: [ ]
-      summary: Modifier une catégorie
-      description:
-        Cette route permet de modifier une catégories.
+        - Bearer: []
+      summary: Update a category
+      description: "This route allows modifying a category."
       parameters:
         - in: header
           name: Authorization
-          description: Attach Bearer JWT token
+          description: "Attach Bearer JWT token"
           required: true
           type: string
         - in: path
           name: id
-          description: ID de la transaction à modifier
+          description: "ID of the transaction to modify"
           required: true
           type: integer
         - in: body
           name: body
-          description: Nouvelles données de la transaction
+          description: "New transaction data"
           required: true
           schema:
-            $ref: '#/definitions/putTransaction'
-      produces:
-        - application/json
+            $ref: '#/definitions/objectTransaction'
       responses:
         '200':
-          description: Succès de la modification de la catégorie
+          description: "Success in modifying the category"
         '400':
-          description: Invalid Fields
+          description: "Invalid Fields"
         '500':
-          description: Internal Server Error
-    post:
-      security:
-        - Bearer: [ ]
-      summary: Ajouter une note
-      description:
-        Cette route permet d'ajouter une note a une transaction.
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Données de la transaction
-          required: true
-          schema:
-              $ref: '#/definitions/deleteTransaction'
-      produces:
-            - application/json
-      responses:
-        '200':
-          description: Succès de la création de la note
-        '400':
-            description: Invalid Fields
-        '500':
-            description: Internal Server Error
-
+          description: "Internal Server Error"
     delete:
       security:
-        - Bearer: [ ]
-      summary: Supprimer une transaction
-      description:
-        Cette route permet de supprimer une transaction spécifique de l'utilisateur.
+        - Bearer: []
+      summary: Delete a transaction
+      description: "This route allows deleting a specific transaction for the user."
       parameters:
         - in: header
           name: Authorization
-          description: Attach Bearer JWT token
+          description: "Attach Bearer JWT token"
           required: true
           type: string
         - in: path
           name: id
-          description: ID de la transaction à supprimer
+          description: "ID of the transaction to delete"
           required: true
           type: integer
       responses:
         '200':
-          description: Succès de la suppression de la transaction
+          description: "Success in deleting the transaction"
         '400':
-          description: Invalid Fields
+          description: "Invalid Fields"
         '500':
-            description: Internal Server Error
-
+          description: "Internal Server Error"
   /transactions:
     get:
       security:
-        - Bearer: [ ]
-      summary: Récupérer toutes les transactions
-      description:
-        Cette route renvoie toutes les transactions de l'utilisateur.
+        - Bearer: []
+      summary: Get all transactions
+      description: "This route returns all transactions for the user."
       parameters:
         - in: header
           name: Authorization
-          description: Attach Bearer JWT token
+          description: "Attach Bearer JWT token"
           required: true
           type: string
       responses:
         '200':
-          description: Succès de la récupération des transactions
+          description: "Success in retrieving the transactions"
           schema:
-              $ref: '#/definitions/allTransactions'
+            $ref: '#/definitions/allTransactions'
         '400':
-            description: Invalid Fields
+          description: "Invalid Fields"
         '500':
-            description: Internal Server Error
+          description: "Internal Server Error"
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -155,31 +124,31 @@ securityDefinitions:
     in: header
 definitions:
   allTransactions:
-      properties:
-        date:
-          type: string
-          format: date-time
-          example: "2022-05-09T10:30:00.000Z"
-        description:
-          type: string
-          example: "Achat de nourriture"
-        amount:
-          type: number
-          example: 25.99
-        balance:
-          type: number
-          example: 153.20
-        type:
-          type: string
-          example: "Dépense"
-  deleteTransaction:
+    properties:
+      date:
+        type: string
+        format: date-time
+        example: "2022-05-09T10:30:00.000Z"
+      description:
+        type: string
+        example: "Purchased a new phone"
+      amount:
+        type: number
+        example: 25.99
+      balance:
+        type: number
+        example: 153.20
+      type:
+        type: string
+        example: "Electronic"
+      category:
+        type: string
+        example: "Shopping"
+      note:
+        type: string
+        example: "Purchased a new phone"
+  objectTransaction:
     properties:
       description:
         type: string
-        example: "Achat pour la sortie scolaire"
-  putTransaction:
-    properties:
-      description:
-        type: string
-        example: "Achat de nourriture pour oiseaux"
-
+        example: "Purchased bird food"
