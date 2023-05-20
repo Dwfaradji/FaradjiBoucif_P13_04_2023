@@ -1,6 +1,5 @@
 import React from 'react';
 import "./Account.css"
-
 /**
  *
  * @param {string} title

@@ -9,7 +9,7 @@ function App() {
     return (
         <Provider store={store}>
             <Router>
-                <NavBar userLogin={false}/>
+                <NavBar/>
                 <RouteApp/>
                 <Footer/>
             </Router>

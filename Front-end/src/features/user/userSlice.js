@@ -1,6 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {putProfile, loginUser, getProfile} from './userApi';
 
+/* This code is creating a Redux slice called `tokenSlice` using the `createSlice` function from the
+`@reduxjs/toolkit` library. */
 const tokenSlice = createSlice({
     name: "token",
     initialState: {
