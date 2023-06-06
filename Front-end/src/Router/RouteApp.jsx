@@ -8,7 +8,7 @@ import {getProfile} from "../features/user/userApi";
 
 const RouteApp = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(null)
-    const {token} = useSelector((state) => state.token)
+    const {token} = useSelector((state) => state.userStore)
     const dispatch = useDispatch();
 
     useEffect(() => {

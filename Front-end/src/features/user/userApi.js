@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setToken } from "./userSlice";
+import { userSlice } from "./userSlice";
+const setToken = userSlice.actions.setToken;
 
 /*
 *   This code is creating a constant called `baseUrl` that contains the base URL for the API.
@@ -32,7 +33,7 @@ export const loginUser = createAsyncThunk(
 /* This code is creating an asynchronous thunk function called `putProfile` that will handle updating
 the user's profile information. It takes one argument: `data`, which contains the user's updated
 first and last name as well as their authentication token. */
-export const putProfile = createAsyncThunk("user/putProfile", async (data) => {
+export const putProfile = createAsyncThunk("userInfos/putProfile", async (data) => {
   const headers = {
     accept: "application/json",
     Authorization: `Bearer ${data.token}`,
@@ -47,6 +48,7 @@ export const putProfile = createAsyncThunk("user/putProfile", async (data) => {
       },
       { headers }
     );
+    console.log(response.data)
     return await response.data;
   } catch (error) {
     console.log("Erreur lors de la requête POST", error);

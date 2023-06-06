@@ -39,7 +39,7 @@ paths:
         '200':
           description: "Success in retrieving the transaction"
           schema:
-            $ref: '#/definitions/allTransactions'
+            $ref: '#/definitions/typesTransactions'
         '400':
           description: "Invalid Fields"
         '500':
@@ -112,7 +112,7 @@ paths:
         '200':
           description: "Success in retrieving the transactions"
           schema:
-            $ref: '#/definitions/allTransactions'
+            $ref: '#/definitions/typesTransactions'
         '400':
           description: "Invalid Fields"
         '500':
@@ -123,7 +123,7 @@ securityDefinitions:
     name: Authorization
     in: header
 definitions:
-  allTransactions:
+  typesTransactions:
     properties:
       date:
         type: string

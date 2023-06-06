@@ -1,10 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import {
-  authSlice,
-  getUserSlice,
-  tokenSlice,
-  userSlice,
-} from "../features/user/userSlice";
+import {configureStore} from "@reduxjs/toolkit";
+import {userSlice} from "../features/user/userSlice";
 
 /* This code is creating a Redux store using the `configureStore` function from the `@reduxjs/toolkit`
 library. The store has four reducers defined under the `reducer` key: `token`, `auth`, `user`, and
@@ -13,12 +8,9 @@ library. The store has four reducers defined under the `reducer` key: `token`, `
 reducers will handle the state updates for the corresponding parts of the application state. The
 resulting store object is exported as the default export of the module. */
 const store = configureStore({
-  reducer: {
-    token: tokenSlice.reducer,
-    auth: authSlice.reducer,
-    user: userSlice.reducer,
-    infosUser: getUserSlice.reducer,
-  },
+    reducer: {
+        userStore: userSlice.reducer
+    },
 });
 
 export default store;

@@ -9,8 +9,7 @@ const User = () => {
     const [userLastName, setUserLastName] = useState("");
     const [edit, setEdit] = useState("")
     const [btnEdit, setBtnEdit] = useState(`edit-button`)
-    const {token} = useSelector((state) => state.token);
-    const {profileInfos} = useSelector((state) => state.infosUser);
+    const {profileInfos, token} = useSelector((state) => state.userStore);
     const dispatch = useDispatch();
 
     const handleSaveName = (e) => {
@@ -19,9 +18,14 @@ const User = () => {
             firstName: userFirstName,
             lastName: userLastName
         }
+
+        const updateProfile = async () => {
+            await dispatch(putProfile({token, user}));
+            await dispatch(getProfile(token));
+        }
+
         if (userFirstName && userLastName) {
-            dispatch(putProfile({token, user}));
-            dispatch(getProfile(token));
+            updateProfile()
         }
 
         const inputs = document.querySelectorAll("input");
