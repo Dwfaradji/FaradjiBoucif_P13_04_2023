@@ -22,8 +22,7 @@
     box-sizing: border-box;
     background-color: white;
     width: 300px;
-    margin: 0 auto;
-    margin-top: 3rem;
+    margin: 3rem auto 0;
     padding: 2rem;
 }
 

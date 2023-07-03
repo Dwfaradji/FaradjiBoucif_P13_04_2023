@@ -5,6 +5,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: 300px;
+    min-height: 300px;
     position: relative;
 }
 
@@ -32,6 +33,7 @@
 @media (min-width: 920px) {
     .hero {
         height: 400px;
+        min-height: 400px;
         background-position: 0 33%;
     }
 

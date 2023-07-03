@@ -11,7 +11,6 @@ function App() {
             <Router>
                 <NavBar/>
                 <RouteApp/>
-                <Footer/>
             </Router>
         </Provider>
     );

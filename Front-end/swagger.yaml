@@ -21,7 +21,7 @@ paths:
         type: integer
     get:
       security:
-        - Bearer: []
+        - Bearer: [ ]
       summary: Get a transaction
       description: "This route returns a specific transaction for the user."
       parameters:
@@ -40,13 +40,11 @@ paths:
           description: "Success in retrieving the transaction"
           schema:
             $ref: '#/definitions/typesTransactions'
-        '400':
-          description: "Invalid Fields"
         '500':
           description: "Internal Server Error"
-    put:
+    patch:
       security:
-        - Bearer: []
+        - Bearer: [ ]
       summary: Update a category
       description: "This route allows modifying a category."
       parameters:
@@ -67,15 +65,13 @@ paths:
           schema:
             $ref: '#/definitions/objectTransaction'
       responses:
-        '200':
+        '201':
           description: "Success in modifying the category"
-        '400':
-          description: "Invalid Fields"
         '500':
           description: "Internal Server Error"
     delete:
       security:
-        - Bearer: []
+        - Bearer: [ ]
       summary: Delete a transaction
       description: "This route allows deleting a specific transaction for the user."
       parameters:
@@ -92,14 +88,12 @@ paths:
       responses:
         '200':
           description: "Success in deleting the transaction"
-        '400':
-          description: "Invalid Fields"
         '500':
           description: "Internal Server Error"
-  /transactions:
+  /transactions/?field={category, type, date,note} & value={value}:
     get:
       security:
-        - Bearer: []
+        - Bearer: [ ]
       summary: Get all transactions
       description: "This route returns all transactions for the user."
       parameters:
@@ -113,8 +107,6 @@ paths:
           description: "Success in retrieving the transactions"
           schema:
             $ref: '#/definitions/typesTransactions'
-        '400':
-          description: "Invalid Fields"
         '500':
           description: "Internal Server Error"
 securityDefinitions:

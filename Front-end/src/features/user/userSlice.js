@@ -17,7 +17,6 @@ const userSlice = createSlice({
     reducers: {
         /*Token*/
         setToken: (state, action) => {
-            console.log(action)
             state.token = action.payload
         },
     },
