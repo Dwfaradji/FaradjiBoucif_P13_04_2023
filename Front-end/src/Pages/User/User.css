@@ -19,6 +19,7 @@
     width: 35%;
     margin: 0 auto;
     row-gap: 10px;
+    justify-content: center;
 }
 
 .edit-input {
